@@ -56,8 +56,11 @@
 
         <small>{{ post.created }}</small>
         <div class="post-comment-create">
-          <input type="text" placeholder="댓글 달기...">
-          <button type="submit">게시</button>
+          <form method="POST">
+            {% csrf_token %}
+            {{ comment_form.content }}
+            <button type="submit">게시</button>
+          </form>
         </div>
 
       </article>

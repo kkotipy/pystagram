@@ -9,3 +9,10 @@ class CommentForm(forms.ModelForm):
             "post",
             "content",
         ]
+        widgets = {
+            "content": forms.Textarea(
+                attrs={
+                    "placeholder": "댓글 달기...",
+                }
+            )
+        }
