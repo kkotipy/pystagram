@@ -1,5 +1,5 @@
 from django.contrib import admin
-from posts.models import Post, PostImage, Comment
+from posts.models import Post, PostImage, Comment, HashTag
 
 import admin_thumbnails
 
@@ -43,3 +43,8 @@ class CommentAdmin(admin.ModelAdmin):
         "post",
         "content",
     ]
+
+
+@admin.register(HashTag)
+class HashTagAdmin(admin.ModelAdmin):
+    pass
