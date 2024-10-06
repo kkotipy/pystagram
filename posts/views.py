@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views.decorators.http import require_POST
 
 from posts.forms import CommentForm, PostForm
-from posts.models import Post, Comment, PostImage
+from posts.models import Post, Comment, PostImage, HashTag
 
 
 def feeds(request):
@@ -88,3 +88,22 @@ def post_add(request):
 
     context = {"form": form}
     return render(request, "posts/post_add.html", context)
+
+
+def tags(request, tag_name):
+    try:
+        tag = HashTag.objects.get(name=tag_name)
+    except HashTag.DoesNotExist:
+        # tag_name에 해당하는 HashTag를 찾지 못한 경우, 빈 QuerySet을 돌려준다
+        posts = Post.objects.none()
+    else:
+        posts = Post.objects.filter(tags=tag)
+
+    # context로 Template에 필터링된 Post QuerySet을 넘겨주며,
+    # 어떤 tag_name으로 검색했는지도 넘겨준다
+    context = {
+        "tag_name": tag_name,
+        "posts": posts,
+    }
+
+    return render(request, "posts/tags.html", context)
