@@ -82,7 +82,7 @@ def post_add(request):
             url = reverse("posts:feeds") + f"#post-{post.id}"
             return HttpResponseRedirect(url)
 
-    # GET 요청일 때는 빈 form을 보요주도록 한다
+    # GET 요청일 때는 빈 form을 보여주도록 한다
     else:
         form = PostForm()
 
